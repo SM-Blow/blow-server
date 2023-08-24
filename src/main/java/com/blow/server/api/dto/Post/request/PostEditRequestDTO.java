@@ -1,13 +1,14 @@
 package com.blow.server.api.dto.Post.request;
 
-
 import lombok.NonNull;
 
 import java.time.LocalDateTime;
 
-public record PostCreateRequestDTO(
+public record PostEditRequestDTO(
         @NonNull
         Long userId,
+        @NonNull
+        Long postId,
         @NonNull
         String title,
         @NonNull
@@ -18,4 +19,5 @@ public record PostCreateRequestDTO(
         String photoUrl,
         @NonNull
         LocalDateTime duedate) {
+
 }
