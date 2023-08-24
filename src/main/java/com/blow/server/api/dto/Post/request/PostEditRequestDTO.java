@@ -12,11 +12,15 @@ public record PostEditRequestDTO(
         @NonNull
         String title,
         @NonNull
+        Boolean borrow,
+        @NonNull
         String content,
         @NonNull
         String category,
         @NonNull
         String photoUrl,
+        @NonNull
+        Boolean status,
         @NonNull
         LocalDateTime duedate) {
 
