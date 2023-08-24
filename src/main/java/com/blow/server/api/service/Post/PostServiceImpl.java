@@ -29,6 +29,12 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
+    public PostResponseDTO getPostsByCategory(String category){
+        val postList = postRepository.findPostByCategory(category);
+        return PostResponseDTO.of(postList);
+    }
+
+    @Override
     @Transactional
     public void createPost(Long userId, PostCreateRequestDTO request){
         val user = userRepository.getUserById(userId)

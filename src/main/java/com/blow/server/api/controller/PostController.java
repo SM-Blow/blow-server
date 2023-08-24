@@ -27,6 +27,14 @@ public class PostController {
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POSTS.getMessage(), response));
     }
 
+    @GetMapping("/filter")
+    public ResponseEntity<ApiResponse> getPostsByCategory(
+            @RequestParam String category)
+    {
+        val response = postService.getPostsByCategory(category);
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POSTS_BY_CATEGORY.getMessage(), response));
+    }
+
     @PostMapping("")
     public ResponseEntity<ApiResponse> createPost(
             @Valid @RequestBody PostCreateRequestDTO request)
