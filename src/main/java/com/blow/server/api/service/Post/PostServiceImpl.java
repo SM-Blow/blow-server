@@ -44,7 +44,8 @@ public class PostServiceImpl implements PostService{
         postRepository.save(Post.builder()
                 .title(request.title())
                 .content(request.content())
-                .category(request.Category())
+                .photoUrl(request.photoUrl())
+                .category(request.category())
                 .users(user)
                 .duedate(request.duedate())
                 .build());
@@ -57,7 +58,7 @@ public class PostServiceImpl implements PostService{
         val user = userRepository.getUserById(userId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
 
-        val post = postRepository.getPostById(postId)
+        val post = postRepository.getPostByIdOrderByCreatedAtDesc(postId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
 
         if(!isOwner(post,user.getId())){
@@ -71,8 +72,7 @@ public class PostServiceImpl implements PostService{
     @Transactional
     public void updatePost(Long userId, PostEditRequestDTO request){
         val postId = request.postId();
-        System.out.println(postId);
-        val post = postRepository.getPostById(postId)
+        val post = postRepository.getPostByIdOrderByCreatedAtDesc(postId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
         val user = userRepository.getUserById(userId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
@@ -82,7 +82,8 @@ public class PostServiceImpl implements PostService{
         }
         post.setTitle(request.title());
         post.setContent(request.content());
-        post.setCategory(request.Category());
+        post.setCategory(request.category());
+        post.setPhotoUrl(request.photoUrl());
         post.setDuedate(request.duedate());
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 public record PostResponseDTO(
         List<PostResponseVO> postList)
 {
-    public static PostResponseDTO of (List<Post> postList){
+    public static PostResponseDTO of(List<Post> postList){
         return PostResponseDTO.builder()
                 .postList(postList.stream().map(PostResponseVO::of).toList())
                 .build();
@@ -24,7 +24,7 @@ record PostResponseVO(
         Boolean status,
         LocalDateTime duedate
 ){
-    public static PostResponseVO of (Post post){
+    public static PostResponseVO of(Post post){
         return PostResponseVO.builder()
                 .title(post.getTitle())
                 .borrow(post.isBorrow())

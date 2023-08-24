@@ -14,7 +14,9 @@ public record PostEditRequestDTO(
         @NonNull
         String content,
         @NonNull
-        String Category,
+        String category,
+        @NonNull
+        String photoUrl,
         @NonNull
         LocalDateTime duedate) {
 

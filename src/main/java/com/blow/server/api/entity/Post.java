@@ -33,6 +33,9 @@ public class Post extends TimeStamped {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "photo_url")
+    private String photoUrl;
+
     @Column(name = "duedate")
     private LocalDateTime duedate;
 
