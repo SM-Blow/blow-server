@@ -30,7 +30,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public PostResponseDTO getPostsByCategory(String category){
-        val postList = postRepository.findPostByCategory(category);
+        val postList = postRepository.findPostByCategoryOrderByCreatedAtDesc(category);
         return PostResponseDTO.of(postList);
     }
 
