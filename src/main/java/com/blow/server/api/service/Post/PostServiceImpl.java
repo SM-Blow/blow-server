@@ -4,6 +4,7 @@ package com.blow.server.api.service.Post;
 import com.blow.server.api.common.message.ExceptionMessage;
 import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
 import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
+import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
 import com.blow.server.api.entity.Post;
 import com.blow.server.api.repository.PostRepository;
 import com.blow.server.api.repository.UserRepository;
@@ -51,6 +52,25 @@ public class PostServiceImpl implements PostService{
         }
 
         postRepository.deleteById(postId);
+    }
+
+    @Override
+    @Transactional
+    public void updatePost(Long userId, PostEditRequestDTO request){
+        val postId = request.postId();
+        System.out.println(postId);
+        val post = postRepository.getPostById(postId)
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
+        val user = userRepository.getUserById(userId)
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
+
+        if(!isOwner(post,user.getId())){
+            throw new EntityNotFoundException(ExceptionMessage.NOT_POST_OWNER.getMessage());
+        }
+        post.setTitle(request.title());
+        post.setContent(request.content());
+        post.setCategory(request.Category());
+        post.setDuedate(request.duedate());
     }
 
     private boolean isOwner(Post post, Long userId){
