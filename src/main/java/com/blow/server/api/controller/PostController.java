@@ -19,6 +19,14 @@ import javax.validation.Valid;
 public class PostController {
     private final PostService postService;
 
+    @GetMapping("")
+    public ResponseEntity<ApiResponse> getPosts()
+    {
+        val response = postService.getPosts();
+
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POSTS.getMessage(), response));
+    }
+
     @PostMapping("")
     public ResponseEntity<ApiResponse> createPost(
             @Valid @RequestBody PostCreateRequestDTO request)

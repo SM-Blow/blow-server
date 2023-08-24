@@ -5,6 +5,7 @@ import com.blow.server.api.common.message.ExceptionMessage;
 import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
 import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
 import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
+import com.blow.server.api.dto.Post.response.PostResponseDTO;
 import com.blow.server.api.entity.Post;
 import com.blow.server.api.repository.PostRepository;
 import com.blow.server.api.repository.UserRepository;
@@ -20,6 +21,12 @@ import javax.transaction.Transactional;
 public class PostServiceImpl implements PostService{
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+
+    @Override
+    public PostResponseDTO getPosts(){
+        val postList = postRepository.findAll();
+        return PostResponseDTO.of(postList);
+    }
 
     @Override
     @Transactional
