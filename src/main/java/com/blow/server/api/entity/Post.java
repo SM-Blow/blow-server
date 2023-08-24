@@ -43,7 +43,7 @@ public class Post extends TimeStamped {
     private boolean status;
 
     public boolean isOwner(Long userId){
-        if(!users.getUserId().equals(userId)){
+        if(!users.getId().equals(userId)){
             return false;
         }
         return true;
