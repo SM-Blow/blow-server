@@ -8,13 +8,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "\"Post\"")
+@Entity
 public class Post extends TimeStamped {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

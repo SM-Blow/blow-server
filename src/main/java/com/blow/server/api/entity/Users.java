@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Builder
 @Table(name = "\"Users\"")
+@Entity
 public class Users {
 
     @Id
@@ -21,18 +21,12 @@ public class Users {
     @Column(name= "user_id")
     private Long userId;
 
-    @Column(name= "Id")
-    private String id;
+    @Column(name= "email")
+    private String email;
 
-    @Column(name= "user_nickname")
+    @Column(name= "nickname")
     private String nickname;
 
     @Column(name= "seed")
     private Long seed;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 }

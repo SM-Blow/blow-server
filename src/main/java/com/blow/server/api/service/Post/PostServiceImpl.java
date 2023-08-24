@@ -26,7 +26,7 @@ public class PostServiceImpl implements PostService{
                 .orElseThrow(() -> new EntityNotFoundException(
                         ExceptionMessage.NOT_FOUND_USER.getMessage()));
 
-        val post = postRepository.save(Post.builder()
+        postRepository.save(Post.builder()
                 .title(request.title())
                 .content(request.content())
                 .category(request.Category())
