@@ -12,6 +12,7 @@ public record ApiResponse(Boolean success, String message, Object data) {
                 .data(null)
                 .build();
     }
+
     public static ApiResponse success(String message, Object data){
         return ApiResponse.builder()
                 .success(true)
@@ -19,6 +20,7 @@ public record ApiResponse(Boolean success, String message, Object data) {
                 .data(data)
                 .build();
     }
+
     public static ApiResponse fail(String message){
         return ApiResponse.builder()
                 .success(false)
