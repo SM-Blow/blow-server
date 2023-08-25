@@ -11,6 +11,8 @@ public record PostCreateRequestDTO(
         @NonNull
         String title,
         @NonNull
+        Boolean borrow,
+        @NonNull
         String content,
         @NonNull
         String category,

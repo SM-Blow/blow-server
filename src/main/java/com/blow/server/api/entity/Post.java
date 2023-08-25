@@ -43,7 +43,7 @@ public class Post extends TimeStamped {
     private boolean borrow;
 
     @Column(name = "status")
-    private boolean status;
+    private int status;
 
     public boolean isOwner(Long userId){
         if(!users.getId().equals(userId)){

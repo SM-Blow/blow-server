@@ -43,11 +43,13 @@ public class PostServiceImpl implements PostService{
 
         postRepository.save(Post.builder()
                 .title(request.title())
+                .borrow((request.borrow()))
                 .content(request.content())
                 .photoUrl(request.photoUrl())
                 .category(request.category())
                 .users(user)
                 .duedate(request.duedate())
+                .status(0)
                 .build());
     }
 
@@ -81,10 +83,12 @@ public class PostServiceImpl implements PostService{
             throw new EntityNotFoundException(ExceptionMessage.NOT_POST_OWNER.getMessage());
         }
         post.setTitle(request.title());
+        post.setBorrow(request.borrow());
         post.setContent(request.content());
         post.setCategory(request.category());
         post.setPhotoUrl(request.photoUrl());
         post.setDuedate(request.duedate());
+        post.setStatus(request.status());
     }
 
     private boolean isOwner(Post post, Long userId){
