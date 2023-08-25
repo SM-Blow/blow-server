@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService{
                 .category(request.category())
                 .users(user)
                 .duedate(request.duedate())
-                .status(true)
+                .status(0)
                 .build());
     }
 

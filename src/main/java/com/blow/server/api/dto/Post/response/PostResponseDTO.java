@@ -21,14 +21,14 @@ public record PostResponseDTO(
 record PostResponseVO(
         String title,
         Boolean borrow,
-        Boolean status,
+        Integer status,
         LocalDateTime duedate
 ){
     public static PostResponseVO of(Post post){
         return PostResponseVO.builder()
                 .title(post.getTitle())
                 .borrow(post.isBorrow())
-                .status(post.isStatus())
+                .status(post.getStatus())
                 .duedate(post.getDuedate())
                 .build();
     }
