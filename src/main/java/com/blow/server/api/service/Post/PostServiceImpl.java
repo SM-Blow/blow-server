@@ -5,6 +5,7 @@ import com.blow.server.api.common.message.ExceptionMessage;
 import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
 import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
 import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
+import com.blow.server.api.dto.Post.request.PostEditStatusRequestDTO;
 import com.blow.server.api.dto.Post.response.PostDetailResponseDTO;
 import com.blow.server.api.dto.Post.response.PostResponseDTO;
 import com.blow.server.api.entity.Post;
@@ -100,6 +101,14 @@ public class PostServiceImpl implements PostService{
         post.setCategory(request.category());
         post.setPhotoUrl(request.photoUrl());
         post.setDuedate(request.duedate());
+        post.setStatus(request.status());
+    }
+
+    @Override
+    @Transactional
+    public void updateStatus(PostEditStatusRequestDTO request){
+        val post = postRepository.getPostById(request.postId())
+                .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
         post.setStatus(request.status());
     }
 
