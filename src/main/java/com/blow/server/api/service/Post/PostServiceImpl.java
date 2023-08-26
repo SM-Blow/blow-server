@@ -69,7 +69,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public PostSearchResponseDTO searchPost(String keyword){
-        val postList = postRepository.findAllByKeyword(keyword);
+        val postList = postRepository.findAllByKeyword(keyword, keyword);
         return PostSearchResponseDTO.of(postList);
     }
 
