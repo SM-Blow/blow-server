@@ -22,7 +22,7 @@ public class Post extends TimeStamped {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private Users users;
+    private User user;
 
     @Column(name = "title")
     private String title;
@@ -46,7 +46,7 @@ public class Post extends TimeStamped {
     private int status;
 
     public boolean isOwner(Long userId){
-        if(!users.getId().equals(userId)){
+        if(!user.getId().equals(userId)){
             return false;
         }
         return true;

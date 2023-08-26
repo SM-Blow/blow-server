@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-    Optional<Post> getPostByIdOrderByCreatedAtDesc(Long postId);
+    Optional<Post> getPostById(Long postId);
     List<Post> findPostByCategoryOrderByCreatedAtDesc(String category);
 }
