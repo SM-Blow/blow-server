@@ -5,8 +5,10 @@ import com.blow.server.api.common.message.ExceptionMessage;
 import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
 import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
 import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
+import com.blow.server.api.dto.Post.response.PostDetailResponseDTO;
 import com.blow.server.api.dto.Post.response.PostResponseDTO;
 import com.blow.server.api.entity.Post;
+import com.blow.server.api.entity.User;
 import com.blow.server.api.repository.PostRepository;
 import com.blow.server.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -47,10 +50,19 @@ public class PostServiceImpl implements PostService{
                 .content(request.content())
                 .photoUrl(request.photoUrl())
                 .category(request.category())
-                .users(user)
+                .user(user)
                 .duedate(request.duedate())
                 .status(0)
                 .build());
+    }
+
+    @Override
+    public PostDetailResponseDTO getPostDetail(Long postId){
+        val post = postRepository.getPostById(postId)
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
+        val user = userRepository.getUserById(post.getUser().getId())
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
+        return PostDetailResponseDTO.of(post,user);
     }
 
     @Override
@@ -60,7 +72,7 @@ public class PostServiceImpl implements PostService{
         val user = userRepository.getUserById(userId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
 
-        val post = postRepository.getPostByIdOrderByCreatedAtDesc(postId)
+        val post = postRepository.getPostById(postId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
 
         if(!isOwner(post,user.getId())){
@@ -74,7 +86,7 @@ public class PostServiceImpl implements PostService{
     @Transactional
     public void updatePost(Long userId, PostEditRequestDTO request){
         val postId = request.postId();
-        val post = postRepository.getPostByIdOrderByCreatedAtDesc(postId)
+        val post = postRepository.getPostById(postId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
         val user = userRepository.getUserById(userId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));

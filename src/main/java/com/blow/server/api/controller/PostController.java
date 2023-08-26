@@ -23,7 +23,6 @@ public class PostController {
     public ResponseEntity<ApiResponse> getPosts()
     {
         val response = postService.getPosts();
-
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POSTS.getMessage(), response));
     }
 
@@ -33,6 +32,14 @@ public class PostController {
     {
         val response = postService.getPostsByCategory(category);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POSTS_BY_CATEGORY.getMessage(), response));
+    }
+
+    @GetMapping("/detail")
+    public ResponseEntity<ApiResponse> getPostDetail(
+            @RequestParam Long postId)
+    {
+        val response = postService.getPostDetail(postId);
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POST_DETAIL.getMessage(), response));
     }
 
     @PostMapping("")
@@ -56,7 +63,6 @@ public class PostController {
             @Valid @RequestBody PostEditRequestDTO request)
     {
         postService.updatePost(request.userId(), request);
-
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_UPDATE_POST.getMessage()));
     }
 }
