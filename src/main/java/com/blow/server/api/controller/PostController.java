@@ -5,6 +5,7 @@ import com.blow.server.api.common.message.ResponseMessage;
 import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
 import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
 import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
+import com.blow.server.api.dto.Post.request.PostEditStatusRequestDTO;
 import com.blow.server.api.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
@@ -64,5 +65,13 @@ public class PostController {
     {
         postService.updatePost(request.userId(), request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_UPDATE_POST.getMessage()));
+    }
+
+    @PatchMapping("/status")
+    public ResponseEntity<ApiResponse> updateStatus(
+            @Valid @RequestBody PostEditStatusRequestDTO request)
+    {
+        postService.updateStatus(request);
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_UPDATE_STATUS.getMessage()));
     }
 }
