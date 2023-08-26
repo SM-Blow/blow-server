@@ -8,6 +8,7 @@ import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
 import com.blow.server.api.dto.Post.request.PostEditStatusRequestDTO;
 import com.blow.server.api.dto.Post.response.PostDetailResponseDTO;
 import com.blow.server.api.dto.Post.response.PostResponseDTO;
+import com.blow.server.api.dto.Post.response.PostSearchResponseDTO;
 import com.blow.server.api.entity.Post;
 import com.blow.server.api.entity.User;
 import com.blow.server.api.repository.PostRepository;
@@ -67,20 +68,9 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    @Transactional
-    public void deletePost(Long userId, PostDeleteRequestDTO request){
-        val postId = request.postId();
-        val user = userRepository.getUserById(userId)
-                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
-
-        val post = postRepository.getPostById(postId)
-                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
-
-        if(!isOwner(post,user.getId())){
-            throw new EntityNotFoundException(ExceptionMessage.NOT_POST_OWNER.getMessage());
-        }
-
-        postRepository.deleteById(postId);
+    public PostSearchResponseDTO searchPost(String keyword){
+        val postList = postRepository.findAllByKeyword(keyword);
+        return PostSearchResponseDTO.of(postList);
     }
 
     @Override
@@ -110,6 +100,23 @@ public class PostServiceImpl implements PostService{
         val post = postRepository.getPostById(request.postId())
                 .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
         post.setStatus(request.status());
+    }
+
+    @Override
+    @Transactional
+    public void deletePost(Long userId, PostDeleteRequestDTO request){
+        val postId = request.postId();
+        val user = userRepository.getUserById(userId)
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
+
+        val post = postRepository.getPostById(postId)
+                .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
+
+        if(!isOwner(post,user.getId())){
+            throw new EntityNotFoundException(ExceptionMessage.NOT_POST_OWNER.getMessage());
+        }
+
+        postRepository.deleteById(postId);
     }
 
     private boolean isOwner(Post post, Long userId){

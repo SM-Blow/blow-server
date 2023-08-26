@@ -74,4 +74,12 @@ public class PostController {
         postService.updateStatus(request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_UPDATE_STATUS.getMessage()));
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse> searchPost(
+            @RequestParam String keyword)
+    {
+        val response = postService.searchPost(keyword);
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_SEARCH_POST.getMessage(), response));
+    }
 }
