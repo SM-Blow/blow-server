@@ -9,7 +9,6 @@ import javax.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
 public class ErrorHandler {
-
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ApiResponse> handleEntityNotFoundException(EntityNotFoundException exception){
         ApiResponse response = ApiResponse.fail(exception.getMessage());
