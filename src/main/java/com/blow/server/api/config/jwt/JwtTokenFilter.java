@@ -43,7 +43,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             if (!isTokenAvailable) {
                 throw new TokenException(ExceptionMessage.INVALID_TOKEN.getMessage(), HttpStatus.UNAUTHORIZED);
             }
-
             val auth = jwtTokenManager.getAuthentication(token);
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(auth);

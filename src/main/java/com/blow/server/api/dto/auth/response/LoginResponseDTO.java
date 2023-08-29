@@ -9,8 +9,8 @@ public record LoginResponseDTO (
         String userName,
         String accessToken
 ){
-    public static SignInResponseDTO of(User user, String accessToken) {
-        return SignInResponseDTO.builder()
+    public static LoginResponseDTO of(User user, String accessToken) {
+        return LoginResponseDTO.builder()
                 .id(user.getId())
                 .userName(user.getNickname())
                 .accessToken(accessToken)

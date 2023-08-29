@@ -8,20 +8,16 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.security.auth.message.AuthException;
 import javax.xml.bind.DatatypeConverter;
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.security.SignatureException;
+
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -66,7 +62,7 @@ public class JwtTokenManager {
             getClaimsFromToken(token);
             return true;
         } catch (SignatureException | ExpiredJwtException e) {
-            return false;
+            throw new TokenException(ExceptionMessage.INVALID_TOKEN.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

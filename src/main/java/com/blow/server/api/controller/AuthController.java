@@ -4,10 +4,12 @@ import com.blow.server.api.common.ApiResponse;
 import com.blow.server.api.common.message.ResponseMessage;
 import com.blow.server.api.dto.auth.request.LoginRequestDTO;
 import com.blow.server.api.dto.auth.request.SignInRequestDTO;
+import com.blow.server.api.entity.BlowUserDetails;
 import com.blow.server.api.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +24,12 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/signin")
-    public ResponseEntity<ApiResponse> singIn(
+    @PostMapping("/signup")
+    public ResponseEntity<ApiResponse> singUp(
             @Valid @RequestBody SignInRequestDTO request)
     {
         val response = authService.signIn(request);
-        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_SIGNIN_USER.getMessage(), response));
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_SIGNUP_USER.getMessage(), response));
     }
 
     @PostMapping("/login")

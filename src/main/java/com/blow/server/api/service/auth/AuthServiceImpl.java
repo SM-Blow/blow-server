@@ -30,13 +30,13 @@ public class AuthServiceImpl implements AuthService{
         if (validateEmail(request.email())) {
             throw new EntityNotFoundException(ExceptionMessage.EXIST_EMAIL.getMessage());
         }
-        if (validateEmail(request.userName())) {
+        if (validateUserName(request.userName())) {
             throw new IllegalArgumentException(ExceptionMessage.EXIST_USERNAME.getMessage());
         }
 
         String encryptedPassword = saltEncrypt.createPasswordWithSalt(request.password());
 
-        User user = userRepository.save(request.toEntity(encryptedPassword));
+        val user = userRepository.save(request.toEntity(encryptedPassword));
 
         val userId = user.getId();
         val accessToken = jwtTokenManager.createAccessToken(userId);
@@ -48,7 +48,17 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO request) {
-        return null;
+        if (!validateEmail(request.email()))
+            throw new EntityNotFoundException(ExceptionMessage.INVALID_EMAIL.getMessage());
+
+        val user = checkPassword(request.email(), request.password());
+        val userId = user.getId();
+
+        val accessToken = jwtTokenManager.createAccessToken(userId);
+        val refreshToken = jwtTokenManager.createRefreshToken(userId);
+        user.updateRefreshToken(refreshToken);
+
+        return LoginResponseDTO.of(user,accessToken);
     }
 
     private boolean validateEmail(String email) {
@@ -61,5 +71,13 @@ public class AuthServiceImpl implements AuthService{
         if (userRepository.existsUserByNickname(userName))
             return true;
         return false;
+    }
+
+    private User checkPassword(String email, String password) {
+        val user = userRepository.findByEmail(email);
+        if (saltEncrypt.isMatch(password, user.getPassword()))
+            return user;
+        else
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_PASSWORD.getMessage());
     }
 }

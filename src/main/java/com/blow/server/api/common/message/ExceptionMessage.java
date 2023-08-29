@@ -21,7 +21,9 @@ public enum ExceptionMessage {
     EXIST_EMAIL("이미 존재하는 이메일입니다."),
     EXIST_USERNAME("이미 존재하는 유저 이름입니다."),
     INVALID_TOKEN("유효하지 않은 토큰입니다"),
-    EMPTY_TOKEN("빈 토큰입니다");
+    EMPTY_TOKEN("빈 토큰입니다"),
+    INVALID_EMAIL("잘못된 이메일입니다."),
+    INVALID_PASSWORD("잘못된 비밀번호입니다.");
 
 
     private final String message;
