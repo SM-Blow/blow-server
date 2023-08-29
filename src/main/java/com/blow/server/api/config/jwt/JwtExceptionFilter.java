@@ -1,7 +1,6 @@
 package com.blow.server.api.config.jwt;
 
 import com.blow.server.api.common.ApiResponse;
-import com.blow.server.api.common.exception.AuthException;
 import com.blow.server.api.common.exception.TokenException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.val;
