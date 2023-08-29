@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ResponseMessage {
+    /** auth **/
+    SUCCESS_SIGNUP_USER("회원가입에 성공했습니다"),
+    SUCCESS_SIGNIN_USER("로그인에 성공했습니다."),
 
     /** presignedUrl **/
     SUCCESS_GET_PRESIGNED_URLS("단일 이미지 업로드 URL 가져오기 성공"),
