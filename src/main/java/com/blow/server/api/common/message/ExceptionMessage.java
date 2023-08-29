@@ -11,8 +11,9 @@ public enum ExceptionMessage {
 
     /** post **/
     NOT_FOUND_POST("해당하는 게시글을 찾을 수 없습니다."),
-    NOT_POST_OWNER("게시물의 주인이 아닙니다.");
+    NOT_POST_OWNER("게시물의 주인이 아닙니다."),
 
-
+    /** s3 **/
+    INVALID_EXTENSION("유효하지 않은 확장자입니다.");
     private final String message;
 }

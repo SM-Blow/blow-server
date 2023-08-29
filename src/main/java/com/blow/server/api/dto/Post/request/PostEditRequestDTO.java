@@ -19,7 +19,7 @@ public record PostEditRequestDTO(
         String category,
         @NonNull
         String photoUrl,
-        @NonNull
+
         int status,
         @NonNull
         LocalDateTime duedate) {

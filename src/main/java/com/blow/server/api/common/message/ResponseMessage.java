@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ResponseMessage {
 
+    /** s3 **/
+    SUCCESS_GET_PRESIGNED_URLS("단일 이미지 업로드 URL 가져오기 성공"),
 
     /** post **/
     SUCCESS_CREATE_WORK("게시글 생성을 완료 했습니다."),
