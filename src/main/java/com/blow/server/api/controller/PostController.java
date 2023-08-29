@@ -6,10 +6,12 @@ import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
 import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
 import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
 import com.blow.server.api.dto.Post.request.PostEditStatusRequestDTO;
+import com.blow.server.api.entity.BlowUserDetails;
 import com.blow.server.api.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -45,33 +47,37 @@ public class PostController {
 
     @PostMapping("")
     public ResponseEntity<ApiResponse> createPost(
+            @AuthenticationPrincipal BlowUserDetails blowUserDetails,
             @Valid @RequestBody PostCreateRequestDTO request)
     {
-        postService.createPost(request.userId(), request);
+        postService.createPost(blowUserDetails.getId(), request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_CREATE_WORK.getMessage()));
     }
 
     @DeleteMapping("")
-    public ResponseEntity<ApiResponse> deleteWork(
+    public ResponseEntity<ApiResponse> deletePost(
+            @AuthenticationPrincipal BlowUserDetails blowUserDetails,
             @Valid @RequestBody PostDeleteRequestDTO request)
     {
-        postService.deletePost(request.userId(), request);
+        postService.deletePost(blowUserDetails.getId(), request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_DELETE_WORK.getMessage()));
     }
 
     @PatchMapping("/edit")
     public ResponseEntity<ApiResponse> updatePost(
+            @AuthenticationPrincipal BlowUserDetails blowUserDetails,
             @Valid @RequestBody PostEditRequestDTO request)
     {
-        postService.updatePost(request.userId(), request);
+        postService.updatePost(blowUserDetails.getId(), request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_UPDATE_POST.getMessage()));
     }
 
     @PatchMapping("/status")
     public ResponseEntity<ApiResponse> updateStatus(
+            @AuthenticationPrincipal BlowUserDetails blowUserDetails,
             @Valid @RequestBody PostEditStatusRequestDTO request)
     {
-        postService.updateStatus(request);
+        postService.updateStatus(blowUserDetails.getId(), request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_UPDATE_STATUS.getMessage()));
     }
 

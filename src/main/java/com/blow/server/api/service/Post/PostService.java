@@ -16,5 +16,5 @@ public interface PostService {
     void createPost(Long userId, PostCreateRequestDTO request);
     void deletePost(Long userId, PostDeleteRequestDTO request);
     void updatePost(Long userId, PostEditRequestDTO request);
-    void updateStatus(PostEditStatusRequestDTO request);
+    void updateStatus(Long userId, PostEditStatusRequestDTO request);
 }

@@ -4,8 +4,6 @@ import lombok.NonNull;
 
 public record PostEditStatusRequestDTO(
         @NonNull
-        Long postId,
-        @NonNull
         Integer status
 ) {
 }

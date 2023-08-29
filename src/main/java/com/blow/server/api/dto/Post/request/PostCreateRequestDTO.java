@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
 
 public record PostCreateRequestDTO(
         @NonNull
-        Long userId,
-        @NonNull
         String title,
         @NonNull
         Boolean borrow,
