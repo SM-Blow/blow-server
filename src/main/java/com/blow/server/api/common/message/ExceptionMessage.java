@@ -26,5 +26,7 @@ public enum ExceptionMessage {
     INVALID_PASSWORD("잘못된 비밀번호입니다.");
 
 
+    /** s3 **/
+    INVALID_EXTENSION("유효하지 않은 확장자입니다.");
     private final String message;
 }
