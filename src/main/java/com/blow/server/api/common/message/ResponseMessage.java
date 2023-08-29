@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ResponseMessage {
+    /** auth **/
+    SUCCESS_SIGNIN_USER("회원가입에 성공했습니다."),
 
 
     /** post **/

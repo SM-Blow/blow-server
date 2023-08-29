@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AuthConfig {
 
-    @Value("${jwt.secret")
+    @Value("${jwt.secret}")
     private String jwtSecretKey;
 }
