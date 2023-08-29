@@ -29,8 +29,6 @@ public class S3ServiceImpl implements S3Service{
             new ArrayList<>(List.of("jpg","jpeg","png","JPG","JPEG","PNG"));
 
 
-    LocalDateTime currentTime = LocalDateTime.now();
-
     @Override
     public PresignedResponseDTO getPresignedUrl(String fileName){
         return createPresignedUrl(fileName);
@@ -62,34 +60,4 @@ public class S3ServiceImpl implements S3Service{
 
         return PresignedResponseDTO.of(signedUrl);
     }
-
-
-//    public PresignedResponseDTO createPresignedUrl(String fileName){
-//        val keyName = BucketPath + currentTime + fileName;
-//        val splitFileName = fileName.split("\\.");
-//        val extension = splitFileName[splitFileName.length-1];
-//        val contentType = "image/" + extension;
-//
-//
-//        if (!imageFileExtension.contains(extension)){
-//            throw new IllegalArgumentException(ExceptionMessage.INVALID_EXTENSION.getMessage());
-//        }
-//
-//
-//        val objectRequest = PutObjectRequest.builder()
-//                .bucket(s3Config.getBucketName())
-//                .key(keyName)
-//                .contentType(contentType)
-//                .build();
-//
-//        val presignRequest = PutObjectPresignRequest.builder()
-//                .signatureDuration(Duration.ofMinutes(10))
-//                .putObjectRequest(objectRequest)
-//                .build();
-//
-//        val presignedRequest = s3Presigner.presignPutObject(presignRequest);
-//        val signedUrl = presignedRequest.url().toString();
-//
-//        return PresignedResponseDTO.of(signedUrl);
-//    }
 }
