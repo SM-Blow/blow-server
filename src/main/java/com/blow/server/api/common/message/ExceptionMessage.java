@@ -23,10 +23,13 @@ public enum ExceptionMessage {
     INVALID_TOKEN("유효하지 않은 토큰입니다"),
     EMPTY_TOKEN("빈 토큰입니다"),
     INVALID_EMAIL("잘못된 이메일입니다."),
-    INVALID_PASSWORD("잘못된 비밀번호입니다.");
+    INVALID_PASSWORD("잘못된 비밀번호입니다."),
 
 
     /** s3 **/
-    INVALID_EXTENSION("유효하지 않은 확장자입니다.");
+    INVALID_EXTENSION("유효하지 않은 확장자입니다."),
+
+    /** notification **/
+    EMPTY_NOTIFICATION_TOKEN("FCM 토큰이 없습니다");
     private final String message;
 }
