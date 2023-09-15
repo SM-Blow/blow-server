@@ -15,7 +15,8 @@ public record SignInRequestDTO (
         @NotBlank(message = "비밀번호는 필수 입력값입니다.")
         String password,
         @NotBlank(message = "닉네임은 필수 입력값입니다.")
-        String userName
+        String userName,
+        String fcmDeviceToken
 ){
         public User toEntity(String password) {
                 return User
@@ -23,6 +24,7 @@ public record SignInRequestDTO (
                         .email(this.email)
                         .nickname(this.userName)
                         .password(password)
+                        .FCMToken(fcmDeviceToken)
                         .build();
         }
 

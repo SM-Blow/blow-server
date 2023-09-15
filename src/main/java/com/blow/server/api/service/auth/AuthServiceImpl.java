@@ -43,9 +43,11 @@ public class AuthServiceImpl implements AuthService{
         val refreshToken = jwtTokenManager.createRefreshToken(userId);
 
         user.updateRefreshToken(refreshToken);
+        user.updateFCMToken(request.fcmDeviceToken());
         return SignInResponseDTO.of(user,accessToken);
     }
 
+    @Transactional
     @Override
     public LoginResponseDTO login(LoginRequestDTO request) {
         if (!validateEmail(request.email()))
@@ -57,6 +59,7 @@ public class AuthServiceImpl implements AuthService{
         val accessToken = jwtTokenManager.createAccessToken(userId);
         val refreshToken = jwtTokenManager.createRefreshToken(userId);
         user.updateRefreshToken(refreshToken);
+        user.updateFCMToken(request.fcmDeviceToken());
 
         return LoginResponseDTO.of(user,accessToken);
     }
