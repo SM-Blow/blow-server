@@ -36,16 +36,13 @@ jobs:
         cd ./src/main
 
         # resources파일 만들기
-        sudo mkdir resources
-        cd resources
-        pwd
+        mkdir -p src/main/resources
+
+        touch src/main/resources/application.yml
 
         # application.yml 파일 생성
         sudo touch ./application.yml
-        ls
 
-        # 파일 권한 확인 
-        ls -l ./application.yml
         # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
         echo "${{ secrets.BLOW_DEV_APPLICATION }}" >> ./application.yml
         
