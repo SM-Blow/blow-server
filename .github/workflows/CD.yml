@@ -38,10 +38,11 @@ jobs:
         # resources파일 만들기
         mkdir -p src/main/resources
 
+        # 파일 생성 
         touch src/main/resources/application.yml
 
-        # application.yml 파일 생성
-        sudo touch ./application.yml
+        # resources 폴더로 이동 
+        cd ./src/main/resources
 
         # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
         echo "${{ secrets.BLOW_DEV_APPLICATION }}" >> ./application.yml
