@@ -49,6 +49,9 @@ public class User {
     @OneToOne(mappedBy = "targetUser")
     private Report report;
 
+    @OneToMany(mappedBy = "user")
+    private List<EventApply> eventApplyList = new ArrayList<>();
+
     @Builder
     public User(String email, String password, String nickname) {
         this.email = email;
