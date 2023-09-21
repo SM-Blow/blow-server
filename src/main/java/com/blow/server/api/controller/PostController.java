@@ -2,10 +2,8 @@ package com.blow.server.api.controller;
 
 import com.blow.server.api.common.ApiResponse;
 import com.blow.server.api.common.message.ResponseMessage;
-import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
-import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
-import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
-import com.blow.server.api.dto.Post.request.PostEditStatusRequestDTO;
+import com.blow.server.api.dto.Post.request.*;
+import com.blow.server.api.entity.BlowUserDetails;
 import com.blow.server.api.entity.BlowUserDetails;
 import com.blow.server.api.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
@@ -71,6 +69,25 @@ public class PostController {
         postService.updatePost(blowUserDetails.getId(), request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_UPDATE_POST.getMessage()));
     }
+
+    @PostMapping("/scrap")
+    public ResponseEntity<ApiResponse> postScrap(
+            @AuthenticationPrincipal BlowUserDetails blowUserDetails,
+            @RequestBody PostScrapRequestDTO request)
+    {
+        val response = postService.scrapPost(blowUserDetails.getId(), request);
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_SCRAP_POST.getMessage(), response));
+    }
+
+    @GetMapping("/scraps")
+    public ResponseEntity<ApiResponse> getPostScraps(
+            @AuthenticationPrincipal BlowUserDetails blowUserDetails
+    )
+    {
+        val response = postService.getPostScraps(blowUserDetails.getId());
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POST_SCRAP_LIST.getMessage(), response));
+    }
+
 
     @PatchMapping("/status")
     public ResponseEntity<ApiResponse> updateStatus(
