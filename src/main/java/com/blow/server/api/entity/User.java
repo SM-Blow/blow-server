@@ -1,8 +1,11 @@
 package com.blow.server.api.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,6 +38,11 @@ public class User {
 
     @Column(name= "seed")
     private Long seed;
+
+    @Where(clause = "status = true")
+    @OneToMany(mappedBy = "user")
+    List<PostScrap> postScraps = new ArrayList<>();
+
 
     @Builder
     public User(String email, String password, String nickname) {

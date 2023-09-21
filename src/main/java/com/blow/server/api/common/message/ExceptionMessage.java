@@ -16,6 +16,7 @@ public enum ExceptionMessage {
     /** post **/
     NOT_FOUND_POST("해당하는 게시글을 찾을 수 없습니다."),
     NOT_POST_OWNER("게시물의 주인이 아닙니다."),
+    NOT_MATCH_POST_SCRAP_STATUS("보낸 게시글 스크랩 상태가 유효하지 않습니다."),
 
     /** auth **/
     EXIST_EMAIL("이미 존재하는 이메일입니다."),

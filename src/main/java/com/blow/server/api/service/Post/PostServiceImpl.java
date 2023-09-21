@@ -2,15 +2,13 @@ package com.blow.server.api.service.Post;
 
 
 import com.blow.server.api.common.message.ExceptionMessage;
-import com.blow.server.api.dto.Post.request.PostCreateRequestDTO;
-import com.blow.server.api.dto.Post.request.PostDeleteRequestDTO;
-import com.blow.server.api.dto.Post.request.PostEditRequestDTO;
-import com.blow.server.api.dto.Post.request.PostEditStatusRequestDTO;
-import com.blow.server.api.dto.Post.response.PostDetailResponseDTO;
-import com.blow.server.api.dto.Post.response.PostResponseDTO;
-import com.blow.server.api.dto.Post.response.PostSearchResponseDTO;
+import com.blow.server.api.dto.Post.request.*;
+import com.blow.server.api.dto.Post.response.*;
 import com.blow.server.api.entity.Post;
 import com.blow.server.api.entity.User;
+import com.blow.server.api.entity.PostScrap;
+import com.blow.server.api.repository.PostScrapRepository;
+import com.blow.server.api.entity.superclass.TimeStamped;
 import com.blow.server.api.repository.PostRepository;
 import com.blow.server.api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +17,15 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
 public class PostServiceImpl implements PostService{
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final PostScrapRepository postScrapRepository;
 
     @Override
     public PostResponseDTO getPosts(){
@@ -119,10 +119,62 @@ public class PostServiceImpl implements PostService{
         postRepository.deleteById(postId);
     }
 
+    @Override
+    @Transactional
+    public PostScrapResponseDTO scrapPost(Long userId, PostScrapRequestDTO postScrapRequestDTO){
+        val postId = postScrapRequestDTO.targetPostId();
+        val post = postRepository.getPostById(postId)
+                .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
+        val user = findUser(userId);
+
+        val postScrap = postScrapRepository
+                .findByUser_IdAndPost_Id(userId, postScrapRequestDTO.targetPostId());
+
+        if(Objects.nonNull(postScrap)){
+            val status = postScrap.isStatus();
+            validateStatusRequest(status, postScrapRequestDTO.currentScrapStatus());
+
+            postScrap.setStatus(!status);
+
+            return PostScrapResponseDTO.of(postId, postScrap.isStatus());
+        }
+
+        val createPostScrap = postScrapRepository.save(PostScrap.builder()
+                .user(user)
+                .post(post)
+                .build());
+
+        return PostScrapResponseDTO.of(postId, createPostScrap.isStatus());
+    }
+
+    @Override
+    public PostScrapsResponseDTO getPostScraps(Long userId){
+        val user = findUser(userId);
+        val postScraps = user.getPostScraps();
+        postScraps.sort(Comparator.comparing(TimeStamped::getCreatedAt).reversed());
+
+        val postList = postScraps.stream()
+                .map(PostScrap::getPost)
+                .toList();
+
+        return PostScrapsResponseDTO.of(postList);
+    }
     private boolean isOwner(Post post, Long userId){
         if (!post.isOwner(userId)){
             return false;
         }
         return true;
+    }
+
+
+    private void validateStatusRequest(boolean status, boolean requestStatus){
+        if(status != requestStatus){
+            throw new IllegalArgumentException(ExceptionMessage.NOT_MATCH_POST_SCRAP_STATUS.getMessage());
+        }
+    }
+
+    private User findUser(Long userId){
+        return userRepository.getUserById(userId)
+                .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
     }
 }
