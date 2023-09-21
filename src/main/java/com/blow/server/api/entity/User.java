@@ -43,6 +43,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<PostScrap> postScraps = new ArrayList<>();
 
+    @OneToMany(mappedBy = "reportUser")
+    private List<Report> reportList = new ArrayList<>();
+
+    @OneToOne(mappedBy = "targetUser")
+    private Report report;
 
     @Builder
     public User(String email, String password, String nickname) {
