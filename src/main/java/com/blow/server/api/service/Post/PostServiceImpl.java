@@ -96,8 +96,8 @@ public class PostServiceImpl implements PostService{
 
     @Override
     @Transactional
-    public void updateStatus(PostEditStatusRequestDTO request){
-        val post = postRepository.getPostById(request.postId())
+    public void updateStatus(Long userId, PostEditStatusRequestDTO request){
+        val post = postRepository.getPostById(userId)
                 .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
         post.setStatus(request.status());
     }

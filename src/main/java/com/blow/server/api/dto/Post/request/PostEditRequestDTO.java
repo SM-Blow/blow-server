@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 
 public record PostEditRequestDTO(
         @NonNull
-        Long userId,
-        @NonNull
         Long postId,
         @NonNull
         String title,
