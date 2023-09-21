@@ -1,8 +1,8 @@
 package com.blow.server.api.entity;
 
 
+import com.blow.server.api.entity.superclass.TimeStamped;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "\"Coupon\"")
 @Entity
-public class Coupon {
+public class Coupon extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
