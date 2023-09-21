@@ -27,6 +27,9 @@ public class User {
     @Column(name="refresh_token")
     private String refreshToken;
 
+    @Column(name="fcm_token")
+    private String FCMToken;
+
     @Column(name= "nickname")
     private String nickname;
 
@@ -40,6 +43,7 @@ public class User {
         this.nickname = nickname;
     }
 
+    public void updateFCMToken(String fcmToken) { this.FCMToken = fcmToken; }
     public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }

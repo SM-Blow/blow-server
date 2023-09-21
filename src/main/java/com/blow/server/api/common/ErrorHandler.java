@@ -1,6 +1,8 @@
 package com.blow.server.api.common;
 
+import com.blow.server.api.common.exception.FcmException;
 import com.blow.server.api.common.exception.TokenException;
+import com.google.firebase.messaging.FirebaseMessagingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +50,12 @@ public class ErrorHandler {
 
     @ExceptionHandler(TokenException.class)
     public ResponseEntity<ApiResponse> handleTokenException(TokenException exception){
+        ApiResponse response = ApiResponse.fail(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FcmException.class)
+    public ResponseEntity<ApiResponse> handleTokenException(FcmException exception){
         ApiResponse response = ApiResponse.fail(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

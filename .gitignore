@@ -38,3 +38,4 @@ out/
 
 ### config yml ###
 application.yml
+**/src/main/resources/firebase
