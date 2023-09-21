@@ -2,6 +2,8 @@ package com.blow.server.api.entity;
 
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -22,6 +24,9 @@ public class Coupon {
 
     @Column(name = "due_date")
     private LocalDateTime dueDate;
+
+    @Column(name = "status")
+    private boolean status = true;
 
     @Column(name = "coupon_code")
     private String couponCode;
