@@ -15,7 +15,7 @@ public class Coupon extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "coupon_id")
-    private int id;
+    private Long id;
 
     @Column(name = "store_name")
     private String storeName;

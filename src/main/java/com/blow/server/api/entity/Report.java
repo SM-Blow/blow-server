@@ -15,7 +15,7 @@ public class Report extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "report_id")
-    private int id;
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @Column(name = "target_user_id")

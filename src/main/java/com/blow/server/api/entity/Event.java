@@ -16,7 +16,7 @@ public class Event extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
-    private int id;
+    private Long id;
 
     @Column(name = "title")
     private String title;

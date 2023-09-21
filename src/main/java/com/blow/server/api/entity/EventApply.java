@@ -14,7 +14,7 @@ public class EventApply extends TimeStamped {
     @Id
     @GeneratedValue
     @Column(name = "event_apply_id")
-    private int id;
+    private Long id;
 
     @Column(name = "status")
     private boolean status;
