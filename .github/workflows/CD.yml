@@ -34,22 +34,18 @@ jobs:
       run: |
         ## create application.yml
         cd ./src/main
+        mkdir resources
+        cd resources
 
-        # resources파일 만들기
-        mkdir -p src/main/resources
-
-        # 파일 생성 
-        touch src/main/resources/application.yml
-
-        # resources 폴더로 이동 
-        cd ./src/main/resources
+        # application.yml 파일 생성
+        touch ./application.yml
 
         # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
         echo "${{ secrets.BLOW_DEV_APPLICATION }}" >> ./application.yml
         
         # application.yml 파일 확인
-        sudo cat ./application.yml
-  
+        cat ./application.yml
+
     # 4) FCM 파일 생성    
     - name: make firebase SDK file
       run: |
