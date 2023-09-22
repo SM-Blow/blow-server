@@ -52,7 +52,7 @@ jobs:
       id: create-json
       uses: jsdaniell/create-json@1.1.2
       with:
-        name: "firebase/blow-31a43-firebase-adminsdk-pacsd-19008fc544.json"
+        name: "src/main/resources/firebase/blow-31a43-firebase-adminsdk-pacsd-19008fc544.json"
         json: ${{ secrets.FCM_SECRET }}
         
 
