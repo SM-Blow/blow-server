@@ -59,6 +59,9 @@ jobs:
         touch ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
 
         echo "${{ secrets.FCM_SECRET }}" >> ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
+
+        cat ./application.yml
+        pwd 
         
       shell: bash
         
