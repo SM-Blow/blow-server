@@ -1,4 +1,4 @@
-package com.blow.server.api.dto.Post.request;
+package com.blow.server.api.dto.post.request;
 
 public record PostScrapRequestDTO(
         Long targetPostId,

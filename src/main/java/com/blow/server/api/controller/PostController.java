@@ -2,8 +2,7 @@ package com.blow.server.api.controller;
 
 import com.blow.server.api.common.ApiResponse;
 import com.blow.server.api.common.message.ResponseMessage;
-import com.blow.server.api.dto.Post.request.*;
-import com.blow.server.api.entity.BlowUserDetails;
+import com.blow.server.api.dto.post.request.*;
 import com.blow.server.api.entity.BlowUserDetails;
 import com.blow.server.api.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
