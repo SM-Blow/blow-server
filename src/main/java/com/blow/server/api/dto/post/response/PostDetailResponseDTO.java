@@ -1,4 +1,4 @@
-package com.blow.server.api.dto.Post.response;
+package com.blow.server.api.dto.post.response;
 
 import com.blow.server.api.entity.Post;
 import com.blow.server.api.entity.User;

@@ -43,6 +43,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<PostScrap> postScraps = new ArrayList<>();
 
+    @Where(clause = "status = true")
+    @OneToMany(mappedBy = "user")
+    List<Coupon> coupons = new ArrayList<>();
+
     @OneToMany(mappedBy = "reportUser")
     private List<Report> reportList = new ArrayList<>();
 

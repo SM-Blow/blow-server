@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
-@Table(name = "\"Coupon\"")
+@Table(name = "\"Report\"")
 @Entity
 public class Report extends TimeStamped {
 
@@ -23,7 +23,6 @@ public class Report extends TimeStamped {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-//    @Column(name = "report_user_id")
     private User reportUser;
 
     @Column(name = "content")
