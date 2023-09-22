@@ -26,13 +26,26 @@ public class Coupon extends TimeStamped {
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
-    @Column(name = "status")
-    private boolean status = true;
-
     @Column(name = "coupon_code")
     private String couponCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public Coupon(String storeName, String content, LocalDateTime dueDate, String couponCode, User user){
+        this.storeName = storeName;
+        this.content = content;
+        this.dueDate = dueDate;
+        this.couponCode = couponCode;
+        this.user = user;
+    }
+
+    public boolean isOwner(Long userId){
+        if(!user.getId().equals(userId)){
+            return false;
+        }
+        return true;
+    }
 }
