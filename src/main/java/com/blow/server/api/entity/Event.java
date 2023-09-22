@@ -44,6 +44,10 @@ public class Event extends TimeStamped {
     private List<EventApply> eventApplyList = new ArrayList<>();
 
 
+    public void currentApplyCountUp() {
+        this.currentApplyCount+=1;
+    }
+
     @Builder
     public Event(String title, LocalDateTime dueDate, String host, String content, Long acceptCount) {
         this.title = title;
@@ -53,6 +57,10 @@ public class Event extends TimeStamped {
         this.content = content;
         this.acceptCount = acceptCount;
         this.currentApplyCount = 0L;
+    }
+
+    public void setEventStatus(boolean status) {
+        this.status = status;
     }
 
 }

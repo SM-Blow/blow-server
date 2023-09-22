@@ -1,7 +1,9 @@
 package com.blow.server.api.entity;
 
 import com.blow.server.api.entity.superclass.TimeStamped;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import java.util.Objects;
 @Getter
 @Table(name = "\"EventApply\"")
 @Entity
+@NoArgsConstructor
 public class EventApply extends TimeStamped {
 
     @Id
@@ -42,4 +45,16 @@ public class EventApply extends TimeStamped {
         this.event = event;
         event.getEventApplyList().add(this);
     }
+
+    @Builder
+    public EventApply (User user, Event event) {
+        this.status = true;
+        setUser(user);
+        setEvent(event);
+    }
+
+    public void setStatus (boolean status) {
+        this.status = status;
+    }
+
 }
