@@ -45,25 +45,18 @@ jobs:
         
         # application.yml 파일 확인
         cat ./application.yml
-
-    # 4) FCM 파일 생성    
-    - name: make firebase SDK file
-      run: |
-        ## make firebase SDK file
-        cd ./src/main/resources
-
-        mkdir -p firebase
-
-        cd firebase
-
-        touch ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
-
-        echo "${{ secrets.FCM_SECRET }}" >> ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
-
-        cat blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
-        pwd 
         
-      shell: bash
+        shell: bash
+
+      # 4) Firebase SDK JSON 파일 생성
+    - name: Create Firebase SDK JSON file
+      id: create-json
+      uses: jsdaniell/create-json@1.1.2
+      with:
+        name: "firebase/blow-31a43-firebase-adminsdk-pacsd-19008fc544.json"
+        json: ${{ secrets.FCM_SECRET }}
+        
+
         
     # 이 워크플로우는 gradle build
     - name: Grant execute permission for gradlew
