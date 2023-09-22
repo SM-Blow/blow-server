@@ -1,6 +1,6 @@
 package com.blow.server.api.service.event;
 
-import com.blow.server.api.dto.event.EventMyApplyResponseDTO;
+import com.blow.server.api.dto.event.response.EventMyApplyResponseDTO;
 import com.blow.server.api.dto.event.request.CreateEventRequestDTO;
 import com.blow.server.api.dto.event.response.EventDetailResponseDTO;
 import com.blow.server.api.dto.event.response.EventListResponseDTO;

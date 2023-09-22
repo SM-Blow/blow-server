@@ -23,7 +23,7 @@ public class EventController {
     @PostMapping("")
     public ResponseEntity<ApiResponse> createEvent(@Valid @RequestBody CreateEventRequestDTO request) {
         eventService.createEvent(request);
-        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_CREATE_EVENT.getMessage(), null));
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_CREATE_EVENT.getMessage()));
     }
 
     @GetMapping("/list")
@@ -43,7 +43,7 @@ public class EventController {
                                                   @PathVariable Long eventId) {
         val userId = userDetails.getId();
         eventService.applyEvent(userId, eventId);
-        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_APPLY_EVENT.getMessage(), null));
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_APPLY_EVENT.getMessage()));
     }
 
     @GetMapping("/my")
@@ -53,6 +53,5 @@ public class EventController {
 
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.GET_MY_EVENT.getMessage(), response));
     }
-
 
 }

@@ -1,4 +1,4 @@
-package com.blow.server.api.dto.event;
+package com.blow.server.api.dto.event.response;
 
 import com.blow.server.api.entity.Event;
 import lombok.Builder;
@@ -12,6 +12,7 @@ public record EventMyApplyResponseDTO(
         LocalDateTime dueDate,
         String host
 ) {
+
     public static EventMyApplyResponseDTO of(Event event) {
         return EventMyApplyResponseDTO.builder()
                 .eventId(event.getId())

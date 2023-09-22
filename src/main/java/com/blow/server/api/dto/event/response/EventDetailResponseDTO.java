@@ -14,6 +14,7 @@ public record EventDetailResponseDTO (
         Long currentApplyCount,
         String content
 ){
+
     public static EventDetailResponseDTO of (Event event) {
         return EventDetailResponseDTO.builder()
                 .host(event.getHost())
