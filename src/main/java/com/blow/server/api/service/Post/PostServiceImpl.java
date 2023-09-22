@@ -45,8 +45,7 @@ public class PostServiceImpl implements PostService{
         val user = userRepository.getUserById(userId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         ExceptionMessage.NOT_FOUND_USER.getMessage()));
-
-        postRepository.save(Post.builder()
+        val post = Post.builder()
                 .title(request.title())
                 .borrow((request.borrow()))
                 .content(request.content())
@@ -55,7 +54,8 @@ public class PostServiceImpl implements PostService{
                 .user(user)
                 .duedate(request.duedate())
                 .status(0)
-                .build());
+                .build();
+        postRepository.save(post);
     }
 
     @Override

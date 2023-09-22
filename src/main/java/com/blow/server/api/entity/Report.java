@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
-@Table(name = "\"Coupon\"")
+@Table(name = "\"Report\"")
 @Entity
 public class Report extends TimeStamped {
 

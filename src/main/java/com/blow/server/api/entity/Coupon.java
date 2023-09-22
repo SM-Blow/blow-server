@@ -6,10 +6,12 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Table(name = "\"Coupon\"")
 @Entity
+@NoArgsConstructor
 public class Coupon extends TimeStamped {
 
     @Id
@@ -26,13 +28,36 @@ public class Coupon extends TimeStamped {
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
-    @Column(name = "status")
-    private boolean status = true;
-
     @Column(name = "coupon_code")
     private String couponCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+
+
+    @Builder
+    public Coupon(String storeName, String content, LocalDateTime dueDate, String couponCode, User user){
+        setUser(user);
+        this.storeName = storeName;
+        this.content = content;
+        this.dueDate = dueDate;
+        this.couponCode = couponCode;
+    }
+
+    public void setUser(User user){
+        if(Objects.nonNull(this.user)){
+            this.user.getCoupons().remove(this);
+        }
+        this.user = user;
+        user.getCoupons().add(this);
+    }
+
+    public boolean isOwner(Long userId){
+        if(!user.getId().equals(userId)){
+            return false;
+        }
+        return true;
+    }
 }

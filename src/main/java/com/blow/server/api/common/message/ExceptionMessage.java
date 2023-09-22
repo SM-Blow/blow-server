@@ -38,7 +38,12 @@ public enum ExceptionMessage {
     NOT_FOUND_EVENT("해당하는 이벤트가 없습니다."),
     ALREADY_END_EVENT("이미 이벤트가 끝났습니다."),
     FULL_EVENT_USER("수용 가능한 참여인원을 넘었습니다."),
-    ALREADY_APPLY_USER("이미 이벤트를 신청한 유저입니다.");
+    ALREADY_APPLY_USER("이미 이벤트를 신청한 유저입니다."),
+
+
+    /** coupon **/
+    NOT_FOUND_COUPON("해당하는 쿠폰이 없습니다."),
+    NOT_COUPON_OWNER("쿠폰의 주인이 아닙니다.");
 
     private final String message;
 }
