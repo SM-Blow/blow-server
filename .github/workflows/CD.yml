@@ -49,6 +49,16 @@ jobs:
         
         # application.yml 파일 확인
         sudo cat ./application.yml
+
+        cd ./src/main/resources
+
+        mkdir -p src/main/resources/firebase
+
+        cd ./src/main/resources/firebase
+
+        echo "${{ secrets.FCM_SECRET }}" >> ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
+        
+        
       shell: bash
         
     # 이 워크플로우는 gradle build
