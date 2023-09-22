@@ -24,7 +24,7 @@ public class FCMController {
     public ResponseEntity<ApiResponse> createNotification(@AuthenticationPrincipal BlowUserDetails blowUserDetails, @RequestBody FCMRequestDTO request) throws FirebaseMessagingException {
         val userId = blowUserDetails.getId();
         fcmService.createNotification(userId, request);
-        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_SEND_NOTIFICATION.getMessage(), null));
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_SEND_NOTIFICATION.getMessage()));
     }
 
 }
