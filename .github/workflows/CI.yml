@@ -46,12 +46,9 @@ jobs:
         # application.yml 파일 확인
         cat ./application.yml
 
-        
-        cd ./src/main/resources
-
         mkdir -p src/main/resources/firebase
 
-        cd ./src/main/resources/firebase
+        cd firebase
 
         touch ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
 
