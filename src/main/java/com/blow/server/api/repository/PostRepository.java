@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Optional<Post> getPostById(Long postId);
     List<Post> findPostByCategoryOrderByCreatedAtDesc(String category);
-    List<Post> findAllByUserId(Long userId);
+    List<Post> findAllByUserIdOrderByCreatedAtDesc(Long userId);
     @Query("SELECT p FROM Post p WHERE LOWER(p.title) LIKE %:postTitleKeyword% OR LOWER(p.content) LIKE %:postContentKeyword% ORDER BY p.createdAt DESC")
     List<Post> findAllByKeyword(
             @Param("postTitleKeyword") String postTitleKeyword,
