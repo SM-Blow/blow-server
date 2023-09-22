@@ -31,6 +31,11 @@ public enum ExceptionMessage {
     INVALID_EXTENSION("유효하지 않은 확장자입니다."),
 
     /** notification **/
-    EMPTY_NOTIFICATION_TOKEN("FCM 토큰이 없습니다");
+    EMPTY_NOTIFICATION_TOKEN("FCM 토큰이 없습니다"),
+
+    /** event **/
+    NOT_FOUND_EVENT("해당하는 이벤트가 없습니다."),
+    ALREADY_END_EVENT("이미 이벤트가 끝났습니다.");
+
     private final String message;
 }
