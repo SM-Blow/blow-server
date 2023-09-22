@@ -21,6 +21,9 @@ public class Event extends TimeStamped {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "status")
+    private boolean status;
+
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
