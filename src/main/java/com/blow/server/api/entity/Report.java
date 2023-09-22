@@ -18,7 +18,7 @@ public class Report extends TimeStamped {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "targer_user_id")
+    @JoinColumn(name = "target_user_id")
     private User targetUser;
 
     @ManyToOne(fetch = FetchType.LAZY)

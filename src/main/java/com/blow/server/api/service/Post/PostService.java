@@ -1,7 +1,7 @@
 package com.blow.server.api.service.Post;
 
-import com.blow.server.api.dto.Post.request.*;
-import com.blow.server.api.dto.Post.response.*;
+import com.blow.server.api.dto.post.request.*;
+import com.blow.server.api.dto.post.response.*;
 
 public interface PostService {
     PostResponseDTO getPosts();
