@@ -13,6 +13,9 @@ public enum ResponseMessage {
     /** presignedUrl **/
     SUCCESS_GET_PRESIGNED_URLS("단일 이미지 업로드 URL 가져오기 성공"),
 
+    /** home **/
+    SUCCESS_GET_HOME("홈 화면 조회를 성공했습니다."),
+
     /** user **/
     SUCCESS_GET_MYPAGE("마이페이지 조회를 성공했습니다."),
     /** post **/
