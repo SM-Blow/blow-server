@@ -81,9 +81,9 @@ public class EventServiceImpl implements EventService {
 
         Optional<EventApply> existApply = validateAlreadyApply(userId, eventId); // 이미 신청했던 유저인지 확인
 
-        vaildateEvent(event); // 이벤트 종료 됐는지 확인
+        isClosedEvent(event); // 이벤트 종료 됐는지 확인
 
-        isClosedEvent(event); // 끝난 이벤트인지 확인
+        isFullApply(event); // 정원 초과 됐는지 확인
 
         if (existApply.isEmpty()) {
             EventApply createApply = EventApply.builder()
@@ -92,10 +92,9 @@ public class EventServiceImpl implements EventService {
                                 .build();
             eventApplyRepository.save(createApply);
 
-        }else{
+        } else{
             existApply.get().setStatus(true);
         }
-
         event.currentApplyCountUp();
     }
 
@@ -115,13 +114,13 @@ public class EventServiceImpl implements EventService {
     }
 
 
-    private void vaildateEvent(Event event) {
+    private void isClosedEvent(Event event) {
         if (!event.isStatus()){
             throw new EventException(ExceptionMessage.ALREADY_END_EVENT.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    // 이미 신청했는지 확인 ->
+    // 이미 신청했는지 확인
     private Optional<EventApply> validateAlreadyApply(Long userId, Long eventId) {
         val existApply = eventApplyRepository.findByUser_idAndEvent_id(userId, eventId);
 
@@ -136,7 +135,8 @@ public class EventServiceImpl implements EventService {
         return existApply;
     }
 
-    private void isClosedEvent(Event event) {
+    // 행사 정원 초과됐는지 확인
+    private void isFullApply(Event event) {
         val currentApplyCount = event.getCurrentApplyCount();
         val maxApplyCount = event.getAcceptCount();
 
