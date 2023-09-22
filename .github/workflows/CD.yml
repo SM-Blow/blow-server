@@ -49,15 +49,20 @@ jobs:
         
         # application.yml 파일 확인
         sudo cat ./application.yml
-
+  
+    # 4) FCM 파일 생성    
+    - name: make firebase SDK file
+      run: |
+        ## make firebase SDK file
         cd ./src/main/resources
 
-        mkdir -p src/main/resources/firebase
+        mkdir -p firebase
 
-        cd ./src/main/resources/firebase
+        cd firebase
+
+        touch ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
 
         echo "${{ secrets.FCM_SECRET }}" >> ./blow-31a43-firebase-adminsdk-pacsd-19008fc544.json
-        
         
       shell: bash
         
