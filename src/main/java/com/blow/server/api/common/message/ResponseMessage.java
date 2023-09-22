@@ -41,7 +41,10 @@ public enum ResponseMessage {
     /** coupon **/
     SUCCESS_REGIST_COUPON("쿠폰 등록을 성공 했습니다."),
     SUCCESS_GET_COUPONS("쿠폰 목록 조회를 성공 했습니다."),
-    SUCCESS_USE_COUPON("쿠폰 사용을 성공 했습니다.");
+    SUCCESS_USE_COUPON("쿠폰 사용을 성공 했습니다."),
+
+    /** report **/
+    SUCCESS_CREATE_REPORT("신고 접수가 완료 되었습니다.");
 
     private final String message;
 }

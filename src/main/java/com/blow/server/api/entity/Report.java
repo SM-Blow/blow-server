@@ -2,7 +2,9 @@ package com.blow.server.api.entity;
 
 
 import com.blow.server.api.entity.superclass.TimeStamped;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -10,6 +12,7 @@ import java.util.Objects;
 @Getter
 @Table(name = "\"Report\"")
 @Entity
+@NoArgsConstructor
 public class Report extends TimeStamped {
 
     @Id
@@ -37,5 +40,12 @@ public class Report extends TimeStamped {
         }
         this.reportUser = user;
         user.getReportList().add(this);
+    }
+    @Builder
+    public Report(User reportUser, User targetUser, String content, boolean status) {
+        setReportUser(reportUser);
+        this.targetUser = targetUser;
+        this.content = content;
+        this.status = true;
     }
 }
