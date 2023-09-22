@@ -29,7 +29,9 @@ public enum ResponseMessage {
 
     /** event **/
     SUCCESS_GET_EVENTS("우리학교 행사 목록 조회를 성공 했습니다."),
-    SUCCESS_CREATE_EVENT("행사 생성을 성공 했습니다.");
+    SUCCESS_CREATE_EVENT("행사 생성을 성공 했습니다."),
+    SUCCESS_APPLY_EVENT("학교 행사 신청을 성공 했습니다."),
+    GET_MY_EVENT("내가 신청한 행사 목록 조회를 성공 했습니다.");
 
     private final String message;
 }

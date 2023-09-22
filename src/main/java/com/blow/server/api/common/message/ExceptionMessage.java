@@ -25,6 +25,7 @@ public enum ExceptionMessage {
     EMPTY_TOKEN("빈 토큰입니다"),
     INVALID_EMAIL("잘못된 이메일입니다."),
     INVALID_PASSWORD("잘못된 비밀번호입니다."),
+    NOT_FOUND_USER_WITH_TOKEN("토큰에 해당하는 유저를 찾을 수 없습니다."),
 
 
     /** s3 **/
@@ -35,7 +36,9 @@ public enum ExceptionMessage {
 
     /** event **/
     NOT_FOUND_EVENT("해당하는 이벤트가 없습니다."),
-    ALREADY_END_EVENT("이미 이벤트가 끝났습니다.");
+    ALREADY_END_EVENT("이미 이벤트가 끝났습니다."),
+    FULL_EVENT_USER("수용 가능한 참여인원을 넘었습니다."),
+    ALREADY_APPLY_USER("이미 이벤트를 신청한 유저입니다.");
 
     private final String message;
 }
