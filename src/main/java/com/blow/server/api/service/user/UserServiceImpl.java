@@ -24,8 +24,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserMyPageResponseDTO getMyPage(Long userId){
         val user = findUser(userId);
-        val postList = postRepository.findAllByUserId(userId);
-        postList.sort(Comparator.comparing(TimeStamped::getCreatedAt).reversed());
+        val postList = postRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
         val postScraps = user.getPostScraps();
         postScraps.sort(Comparator.comparing(TimeStamped::getCreatedAt).reversed());
         val ScrapList = postScraps.stream()
