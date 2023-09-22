@@ -29,8 +29,6 @@ public class CouponServiceImpl implements CouponService{
         val user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
 
-//        Coupon coupon = new Coupon(1L,request.storeName(), request.content(), request.dueDate(), request.coupon_code(), user);
-
         val coupon = Coupon.builder()
                 .storeName(request.storeName())
                 .content(request.content())
