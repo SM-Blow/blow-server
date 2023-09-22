@@ -46,6 +46,12 @@ jobs:
         # application.yml 파일 확인
         cat ./application.yml
 
+    # 4) FCM 파일 생성    
+    - name: make firebase SDK file
+      run: |
+        ## make firebase SDK file
+        cd ./src/main/resources
+
         mkdir -p firebase
 
         cd firebase
