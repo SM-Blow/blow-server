@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CouponService {
 
-    void registCoupon(Long userId, CouponRegistRequestDTO couponRegistRequestDTO);
+    void createCoupon(Long userId, CouponRegistRequestDTO request);
     CouponResponseDTO getCouponList(Long userId);
-    void useCoupon(Long userId, CouponUseRequestDTO couponUseRequestDTO);
+    void useCoupon(Long userId, Long couponId);
 }

@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/coupon")
+@RequestMapping("/api/v1/coupon")
 @RequiredArgsConstructor
 public class CouponController {
 
     private final CouponService couponService;
 
     @PostMapping("")
-    private ResponseEntity<ApiResponse> RegistCoupon(
+    private ResponseEntity<ApiResponse> createCoupon(
             @AuthenticationPrincipal BlowUserDetails userDetails,
             @Valid @RequestBody CouponRegistRequestDTO request)
     {
-        couponService.registCoupon(userDetails.getId(), request);
+        couponService.createCoupon(userDetails.getId(), request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_REGIST_COUPON.getMessage()));
     }
 
@@ -42,9 +42,9 @@ public class CouponController {
     @PostMapping("/{couponId}")
     private ResponseEntity<ApiResponse> useCoupon(
             @AuthenticationPrincipal BlowUserDetails userDetails,
-            @Valid @RequestBody CouponUseRequestDTO request)
+            @PathVariable Long couponId)
     {
-        couponService.useCoupon(userDetails.getId(), request);
+        couponService.useCoupon(userDetails.getId(), couponId);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_USE_COUPON.getMessage()));
     }
 }

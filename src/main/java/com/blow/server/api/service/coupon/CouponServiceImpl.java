@@ -25,16 +25,21 @@ public class CouponServiceImpl implements CouponService{
 
     @Override
     @Transactional
-    public void registCoupon(Long userId, CouponRegistRequestDTO request){
+    public void createCoupon(Long userId, CouponRegistRequestDTO request){
         val user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
+
+//        Coupon coupon = new Coupon(1L,request.storeName(), request.content(), request.dueDate(), request.coupon_code(), user);
+
         val coupon = Coupon.builder()
                 .storeName(request.storeName())
                 .content(request.content())
-                .couponCode(request.coupon_code())
+                .couponCode(request.couponCode())
                 .dueDate(request.dueDate())
                 .user(user)
                 .build();
+
+
         couponRepository.save(coupon);
     }
 
@@ -45,8 +50,7 @@ public class CouponServiceImpl implements CouponService{
     }
 
     @Override
-    public void useCoupon(Long userId, CouponUseRequestDTO request){
-        val couponId = request.CouponId();
+    public void useCoupon(Long userId,  Long couponId){
         val user = userRepository.getUserById(userId)
                 .orElseThrow(() -> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
         val coupon = couponRepository.getCouponById(couponId)

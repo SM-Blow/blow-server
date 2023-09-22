@@ -15,6 +15,6 @@ public record CouponRegistRequestDTO(
         LocalDateTime dueDate,
         @NotBlank
         @NotNull
-        String coupon_code
+        String couponCode
 ) {
 }
