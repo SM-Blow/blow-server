@@ -46,7 +46,7 @@ jobs:
         # application.yml 파일 확인
         cat ./application.yml
 
-        mkdir -p src/main/resources/firebase
+        mkdir -p firebase
 
         cd firebase
 
