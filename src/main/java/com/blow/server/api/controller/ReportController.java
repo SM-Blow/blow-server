@@ -27,6 +27,6 @@ public class ReportController {
                                                     @Valid @RequestBody ReportCreateRequestDTO request) {
         val reportUserId = userDetail.getId();
         reportService.createReport(reportUserId, request);
-        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_CREATE_REPORT.getMessage(), null));
+        return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_CREATE_REPORT.getMessage()));
     }
 }

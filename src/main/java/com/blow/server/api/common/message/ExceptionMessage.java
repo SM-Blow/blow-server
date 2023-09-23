@@ -43,7 +43,11 @@ public enum ExceptionMessage {
 
     /** coupon **/
     NOT_FOUND_COUPON("해당하는 쿠폰이 없습니다."),
-    NOT_COUPON_OWNER("쿠폰의 주인이 아닙니다.");
+    NOT_COUPON_OWNER("쿠폰의 주인이 아닙니다."),
+
+    /** report **/
+    ALREADY_APPLY_REPORT_USER("이미 신고한 유저입니다."),
+    NOT_REPORT_ME("자신을 신고할 수 없습니다.");
 
     private final String message;
 }
