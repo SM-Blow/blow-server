@@ -1,9 +1,12 @@
 package com.blow.server.api.config;
 
-import com.google.api.client.util.Value;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -13,7 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
+@EnableWebMvc
 public class SwaggerConfig {
 
     @Value("${swaggerConfig.API_NAME}")
@@ -24,6 +27,12 @@ public class SwaggerConfig {
 
     @Value("${swaggerConfig.API_VERSION}")
     private static String API_DESCRIPTION;
+
+//API_DESCRIPTIONAPI_DESCRIPTION    // Java
+//    @Bean
+//    public InternalResourceViewResolver defaultViewResolver() {
+//        return new InternalResourceViewResolver();
+//    }
 
     @Bean
     public Docket api() {

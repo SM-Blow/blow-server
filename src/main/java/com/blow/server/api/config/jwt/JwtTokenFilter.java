@@ -32,7 +32,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if (!uri.startsWith("/api/v1/auth") && !uri.contains("swagger")) {
+        if (!uri.startsWith("/api/v1/auth") && !uri.contains("swagger")  && !uri.contains("v3")) {
             val token = getToken(request);
 
             if (Objects.isNull(token)) {
