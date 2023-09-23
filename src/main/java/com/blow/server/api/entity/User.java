@@ -39,6 +39,14 @@ public class User {
     @Column(name= "seed")
     private Long seed;
 
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "report_status")
+    @Enumerated(EnumType.STRING)
+    private ReportStatus reportStatus;
+
     @Where(clause = "status = true")
     @OneToMany(mappedBy = "user")
     List<PostScrap> postScraps = new ArrayList<>();
@@ -66,5 +74,9 @@ public class User {
     public void updateFCMToken(String fcmToken) { this.FCMToken = fcmToken; }
     public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public void setReportStatus(ReportStatus reportStatus) {
+        this.reportStatus = reportStatus;
     }
 }
