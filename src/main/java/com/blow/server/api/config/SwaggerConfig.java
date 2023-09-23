@@ -1,19 +1,13 @@
 package com.blow.server.api.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.api.client.util.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -22,25 +16,19 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    private static final String API_NAME = "Blow API";
-    private static final String API_VERSION = "0.0.1";
-    private static final String API_DESCRIPTION = "Blow API 명세서";
+    @Value("${swaggerConfig.API_NAME}")
+    private static String API_NAME;
+
+    @Value("${swaggerConfig.API_VERSION}")
+    private static String API_VERSION;
+
+    @Value("${swaggerConfig.API_VERSION}")
+    private static String API_DESCRIPTION;
 
     @Bean
     public Docket api() {
-        Parameter parameterBuilder = new ParameterBuilder()
-                .name(HttpHeaders.AUTHORIZATION)
-                .description("Access Tocken")
-                .modelRef(new ModelRef("string"))
-                .parameterType("header")
-                .required(false)
-                .build();
-
-        List<Parameter> globalParamters = new ArrayList<>();
-        globalParamters.add(parameterBuilder);
-
-        return new Docket(DocumentationType.SWAGGER_2)
-                .globalOperationParameters(globalParamters)
+        return new Docket(DocumentationType.OAS_30)
+                .useDefaultResponseMessages(true)
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.blow.server.api"))
