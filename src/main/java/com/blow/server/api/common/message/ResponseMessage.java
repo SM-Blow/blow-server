@@ -25,7 +25,7 @@ public enum ResponseMessage {
     SUCCESS_GET_POSTS("게시글 조회를 완료 했습니다."),
     SUCCESS_GET_POSTS_BY_CATEGORY("카테고리 별 게시글 조회를 완료 했습니다."),
     SUCCESS_GET_POST_DETAIL("게시글 상세 조회를 완료 했습니다."),
-    SUCCESS_UPDATE_STATUS("게시글 거래 상태 변경을 완료 했습니다."),
+    SUCCESS_UPDATE_STATUS("게시글 업데이트를 완료 했습니다."),
     SUCCESS_SEARCH_POST("게시글 검색을 완료 했습니다."),
     SUCCESS_SCRAP_POST("게시글 스크랩을 완료 했습니다."),
     SUCCESS_GET_POST_SCRAP_LIST("게시글 스크랩 목록 조회를 완료 했습니다."),

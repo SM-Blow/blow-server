@@ -37,7 +37,7 @@ public class User {
     private String nickname;
 
     @Column(name= "seed")
-    private Long seed;
+    private Long seed=0L;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)

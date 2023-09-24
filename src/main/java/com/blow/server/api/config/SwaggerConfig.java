@@ -28,11 +28,7 @@ public class SwaggerConfig {
     @Value("${swaggerConfig.API_VERSION}")
     private static String API_DESCRIPTION;
 
-//API_DESCRIPTIONAPI_DESCRIPTION    // Java
-//    @Bean
-//    public InternalResourceViewResolver defaultViewResolver() {
-//        return new InternalResourceViewResolver();
-//    }
+
 
     @Bean
     public Docket api() {
