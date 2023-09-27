@@ -34,6 +34,7 @@ public class AuthServiceImpl implements AuthService{
             throw new IllegalArgumentException(ExceptionMessage.EXIST_USERNAME.getMessage());
         }
 
+
         String encryptedPassword = saltEncrypt.createPasswordWithSalt(request.password());
 
         val user = userRepository.save(request.toEntity(encryptedPassword));
