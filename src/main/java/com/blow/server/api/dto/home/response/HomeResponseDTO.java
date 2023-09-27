@@ -6,7 +6,7 @@ import lombok.Builder;
 @Builder
 public record HomeResponseDTO(
         String nickName,
-        Long seed
+        int seed
 ) {
     public static HomeResponseDTO of(User user){
         return HomeResponseDTO.builder()

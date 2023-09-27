@@ -13,7 +13,7 @@ import java.util.List;
 public record UserMyPageResponseDTO(
         Long userId,
         String nickname,
-        Long seed,
+        int seed,
         List<UserMyPostResponseVO> posts,
         List<UserMyScrapResponseVO> scraps)
 {

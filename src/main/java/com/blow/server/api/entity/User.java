@@ -37,7 +37,7 @@ public class User {
     private String nickname;
 
     @Column(name= "seed")
-    private Long seed=0L;
+    private int seed;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
@@ -69,6 +69,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.seed = 0;
     }
 
     public void updateFCMToken(String fcmToken) { this.FCMToken = fcmToken; }
