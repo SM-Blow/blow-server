@@ -97,9 +97,14 @@ public class PostServiceImpl implements PostService{
     @Override
     @Transactional
     public void updateStatus(Long userId, PostEditStatusRequestDTO request){
-        val post = postRepository.getPostById(userId)
-                .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
+        val user = findUser(userId);
+        val post = findPost(request.postId());
         post.setStatus(request.status());
+        if (request.status()==2 && post.isBorrow()){ // 빌리는 글 거래완료 처리하면 씨앗 -1
+            user.setSeed(user.getSeed()-1);
+        } else if (request.status()==2) { // 빌려주는 글 거래완료 처리하면 씨앗 +1
+            user.setSeed(user.getSeed()+1);
+        }
     }
 
     @Override
@@ -176,5 +181,10 @@ public class PostServiceImpl implements PostService{
     private User findUser(Long userId){
         return userRepository.getUserById(userId)
                 .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
+    }
+
+    private Post findPost(Long postId){
+        return postRepository.getPostById(postId)
+                .orElseThrow(()->new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
     }
 }
