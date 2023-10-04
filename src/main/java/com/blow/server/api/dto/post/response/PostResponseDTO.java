@@ -19,6 +19,7 @@ public record PostResponseDTO(
 
 @Builder
 record PostResponseVO(
+        Long postId,
         String title,
         Boolean borrow,
         Integer status,
@@ -26,6 +27,7 @@ record PostResponseVO(
 ){
     public static PostResponseVO of(Post post){
         return PostResponseVO.builder()
+                .postId(post.getId())
                 .title(post.getTitle())
                 .borrow(post.isBorrow())
                 .status(post.getStatus())
