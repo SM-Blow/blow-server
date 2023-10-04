@@ -57,6 +57,7 @@ public class CouponServiceImpl implements CouponService{
         if(!isOwner(coupon, user.getId())){
             throw new EntityNotFoundException((ExceptionMessage.NOT_COUPON_OWNER.getMessage()));
         }
+        couponRepository.deleteById(couponId);
     }
 
     private boolean isOwner(Coupon coupon, Long userId){
