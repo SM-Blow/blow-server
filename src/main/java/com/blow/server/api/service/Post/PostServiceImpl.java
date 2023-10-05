@@ -62,7 +62,7 @@ public class PostServiceImpl implements PostService{
     public PostDetailResponseDTO getPostDetail(Long postId, Long userId){
         val post = postRepository.getPostById(postId)
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_POST.getMessage()));
-        val user = userRepository.getUserById(userId)
+        val user = userRepository.getUserById(post.getUser().getId())
                 .orElseThrow(()-> new EntityNotFoundException(ExceptionMessage.NOT_FOUND_USER.getMessage()));
         val scrap = postScrapRepository.findByUser_IdAndPost_Id(userId, postId);
 
