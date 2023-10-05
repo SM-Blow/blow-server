@@ -23,6 +23,7 @@ record PostSearchResponseVO(
         String title,
         Boolean borrow,
         Integer status,
+        String category,
         LocalDateTime duedate)
 {
     public static PostSearchResponseVO of(Post post){
@@ -31,6 +32,7 @@ record PostSearchResponseVO(
                 .title(post.getTitle())
                 .borrow(post.isBorrow())
                 .status(post.getStatus())
+                .category(post.getCategory())
                 .duedate(post.getDuedate())
                 .build();
     }
