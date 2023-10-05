@@ -14,10 +14,11 @@ public record PostDetailResponseDTO(
         String title,
         Boolean borrow,
         int status,
-        String content)
+        String content,
+        Boolean currentScrapStatus)
 {
     public static PostDetailResponseDTO of(
-            Post post, User user)
+            Post post, User user, Boolean currentScrapStatus)
     {
         return PostDetailResponseDTO.builder()
                 .nickname(user.getNickname())
@@ -27,6 +28,7 @@ public record PostDetailResponseDTO(
                 .borrow(post.isBorrow())
                 .status(post.getStatus())
                 .content(post.getContent())
+                .currentScrapStatus(currentScrapStatus)
                 .build();
     }
 }

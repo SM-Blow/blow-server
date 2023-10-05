@@ -6,7 +6,7 @@ import com.blow.server.api.dto.post.response.*;
 public interface PostService {
     PostResponseDTO getPosts();
     PostResponseDTO getPostsByCategory(String category);
-    PostDetailResponseDTO getPostDetail(Long postId);
+    PostDetailResponseDTO getPostDetail(Long postId, Long userId);
     PostSearchResponseDTO searchPost(String keyword);
     PostScrapResponseDTO scrapPost(Long userId, PostScrapRequestDTO request);
     PostScrapsResponseDTO getPostScraps(Long userId);

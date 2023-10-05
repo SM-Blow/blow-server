@@ -34,11 +34,13 @@ public class PostController {
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POSTS_BY_CATEGORY.getMessage(), response));
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/detail/{postId}")
     public ResponseEntity<ApiResponse> getPostDetail(
-            @RequestParam Long postId)
+            @AuthenticationPrincipal BlowUserDetails blowUserDetails,
+            @PathVariable Long postId)
     {
-        val response = postService.getPostDetail(postId);
+        val userId = blowUserDetails.getId();
+        val response = postService.getPostDetail(postId, userId);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_GET_POST_DETAIL.getMessage(), response));
     }
 
