@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService{
     private final JwtTokenManager jwtTokenManager;
     @Override
     @Transactional
-    public SignInResponseDTO signIn(SignInRequestDTO request) {
+    public SignInResponseDTO singUp(SignInRequestDTO request) {
         if (validateEmail(request.email())) {
             throw new EntityNotFoundException(ExceptionMessage.EXIST_EMAIL.getMessage());
         }

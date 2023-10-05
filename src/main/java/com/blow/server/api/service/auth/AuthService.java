@@ -6,6 +6,6 @@ import com.blow.server.api.dto.auth.response.LoginResponseDTO;
 import com.blow.server.api.dto.auth.response.SignInResponseDTO;
 
 public interface AuthService {
-    SignInResponseDTO signIn(SignInRequestDTO request);
+    SignInResponseDTO singUp(SignInRequestDTO request);
     LoginResponseDTO login(LoginRequestDTO request);
 }

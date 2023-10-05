@@ -26,7 +26,7 @@ public class AuthController {
     public ResponseEntity<ApiResponse> singUp(
             @Valid @RequestBody SignInRequestDTO request)
     {
-        val response = authService.signIn(request);
+        val response = authService.singUp(request);
         return ResponseEntity.ok(ApiResponse.success(ResponseMessage.SUCCESS_SIGNUP_USER.getMessage(), response));
     }
 

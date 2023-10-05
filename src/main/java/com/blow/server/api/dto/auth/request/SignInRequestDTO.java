@@ -23,6 +23,7 @@ public record SignInRequestDTO (
                         .builder()
                         .email(this.email)
                         .nickname(this.userName)
+                        .seed(9)
                         .password(password)
                         .FCMToken(fcmDeviceToken)
                         .build();
