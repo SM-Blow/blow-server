@@ -27,11 +27,13 @@ public class UserServiceImpl implements UserService{
         val postList = postRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
         val postScraps = user.getPostScraps();
         postScraps.sort(Comparator.comparing(TimeStamped::getCreatedAt).reversed());
-        val ScrapList = postScraps.stream()
+
+        val scrapList = postScraps.stream()
+                .filter(postScrap -> postScrap.getPost().getStatus() != 3)
                 .map(PostScrap::getPost)
                 .toList();
 
-        return UserMyPageResponseDTO.of(user, postList, ScrapList);
+        return UserMyPageResponseDTO.of(user, postList, scrapList);
     }
 
 
